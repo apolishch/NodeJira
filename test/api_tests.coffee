@@ -7,6 +7,15 @@ jiraptcl = process.env.JIRAPTCL
 
 
 describe 'api test', ->
-  describe 'Login test', ->
+  describe 'Api test login fail username', ->
+
+  describe 'Api test login fail password', ->
+
+  describe 'Api test login fail jirahost', ->
+
+  describe 'Api test login fail jiraptcl', ->
+
+
+  describe 'Api test login pass', ->
     it 'should login successfully', (done) ->
        jira_api.login username, password, jirahost, jiraptcl, (done)
