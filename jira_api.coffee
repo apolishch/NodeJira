@@ -1,10 +1,22 @@
-CONFIG = require './config'
+# CONFIG = require './config'
+express = require 'express'
+assets = require 'connect-assets'
 request = require 'request'
 
+app.use express.favicon()
+app.use express.bodyParser()
+app.use express.methodOverride()
+app.use express.cookieParser()
+app.use express.session secret: 'randomstuffherethatstryingtobeasecret12@@124'
+app.use app.router
+app.use express.static "#{__dirname}/public"
+
 module.exports =
-  login: (username, password, cb)->
+  login: (username, password, host, protocol, cb)->
+	this.content_url= protocol+"//"+host+"/rest/api/latest"
+	this.authentication_url= protocol+"//"+host+"/rest/auth/latest/session"
     request_options =
-      url: CONFIG.authentication_url
+      url: this.authentication_url
       method: 'POST'
       body:
         username: username
@@ -25,7 +37,7 @@ module.exports =
 
   get_issue_details: (key, cb)->
     request_options =
-      url: CONFIG.content_url+"/issue/"+key
+      url: this.content_url+"/issue/"+key
       method: 'GET'
       headers:
         Cookie: this.cookies.join ";"
@@ -42,7 +54,7 @@ module.exports =
 
   get_issue_list: (jql, cb)->
     request_options =
-      url: CONFIG.content_url+"/search?jql="+jql
+      url: this.content_url+"/search?jql="+jql
       method: 'GET'
       headers:
         Cookie: this.cookies.join ";"
@@ -59,7 +71,7 @@ module.exports =
 
   logout: (cb)->
     request_options =
-      url: CONFIG.authentication_url
+      url: this.authentication_url
       method: 'DELETE'
       headers:
         Cookie: this.cookies.join ";"
