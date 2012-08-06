@@ -1,7 +1,8 @@
-# CONFIG = require './config'
 express = require 'express'
 assets = require 'connect-assets'
 request = require 'request'
+port = process.env.PORT or 3000
+app = express.createServer()
 
 app.use express.favicon()
 app.use express.bodyParser()
@@ -11,10 +12,15 @@ app.use express.session secret: 'randomstuffherethatstryingtobeasecret12@@124'
 app.use app.router
 app.use express.static "#{__dirname}/public"
 
+app.listen port, -> console.log "Listening @ http://0.0.0.0:#{port}"
+
+app.helpers
+  title: "NodeJira"
+
 module.exports =
   login: (username, password, host, protocol, cb)->
-	this.content_url= protocol+"//"+host+"/rest/api/latest"
-	this.authentication_url= protocol+"//"+host+"/rest/auth/latest/session"
+    this.content_url= protocol+"://"+host+"/rest/api/latest"
+    this.authentication_url= protocol+"://"+host+"/rest/auth/latest/session"
     request_options =
       url: this.authentication_url
       method: 'POST'

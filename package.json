@@ -19,7 +19,7 @@
     "nodejira": "bin/nodejia"
   },
   "scripts": {
-    "start": "coffee server.coffee",
+    "start": "coffee jira_api.coffee",
     "test": "./node_modules/mocha/bin/mocha ./test/api_tests.coffee"
   },
   "description": "NodeJira ========",
