@@ -17,3 +17,8 @@ describe 'api test', ->
       jira_api.get_issue_details 'OEP-1234', (err, response, body)->
         assert.equal response.key, "OEP-1234"
         done()
+    
+    it 'should logout', (done)->
+      jira_api.logout (err, response, body) ->
+        assert.equal jira_api.cookies, null
+        done()     
