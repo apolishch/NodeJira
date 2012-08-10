@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "coffee jira_api.coffee",
-    "test": "./node_modules/mocha/bin/mocha ./test/api_tests.coffee --compilers coffee:coffee-script"
+    "test": "./node_modules/mocha/bin/mocha ./test/api_tests.coffee --compilers coffee:coffee-script -R spec"
   },
   "description": "NodeJira ========",
   "directories": {

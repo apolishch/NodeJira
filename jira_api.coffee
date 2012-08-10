@@ -1,21 +1,8 @@
-express = require 'express'
+
 assets = require 'connect-assets'
 request = require 'request'
 
-app = express.createServer()
 
-app.use express.favicon()
-app.use express.bodyParser()
-app.use express.methodOverride()
-app.use express.cookieParser()
-app.use express.session secret: 'randomstuffherethatstryingtobeasecret12@@124'
-app.use app.router
-app.use express.static "#{__dirname}/public"
-
-port = process.env.PORT or 3000
-app.listen port, -> console.log "Listening @ http://0.0.0.0:#{port}"
-app.helpers
-  title: "NodeJira"
 
 class JiraApiConnector
   constructor: (@username, @password, @host, @protocol)->
