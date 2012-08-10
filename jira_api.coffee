@@ -76,7 +76,7 @@ class JiraApiConnector
         else if response?.statusCode not in [200,201]
           cb code: response.statusCode, msg: body, null
         else
-          cb null, body
+          cb response, body
 
   logout: (cb)->
     request_options =
