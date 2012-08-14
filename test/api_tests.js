@@ -6,6 +6,7 @@ describe('Api test', function() {
     jira.get_issue('OEP-1234', function(err, response) {
       should.not.exist(err);
       should.exist(response);
+      response.key.should.match(/OEP-1234/i);
       done();
     });
   });
@@ -15,6 +16,10 @@ describe('Api test', function() {
       if (err) return done(err);
       should.not.exist(err);
       should.exist(response);
+      should.exist(response.issues);
+      for(var item in response.issues){
+        response.issues[item].key.should.match(/test/i);
+      }
       response.total.should.not.equal(0);
       done();
     });
